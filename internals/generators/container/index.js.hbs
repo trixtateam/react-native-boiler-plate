@@ -1,0 +1,73 @@
+/**
+ *
+ * {{properCase name }}
+ *
+ */
+
+{{#if memo}}
+import React, { memo } from 'react';
+{{else}}
+import React from 'react';
+import {
+    View,
+    Text,
+} from 'react-native';
+import { withTheme } from 'react-native-paper';
+{{/if}}
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+{{#if wantActionsAndReducer}}
+import { createStructuredSelector } from 'reselect';
+{{/if}}
+import { compose } from 'redux';
+import { Helpers } from '../../theme';
+import styles from './{{properCase name}}Style';
+{{#if wantActionsAndReducer}}
+import { useInjectReducer } from '../../utils/injectReducer'
+import makeSelect{{properCase name}} from './selectors';
+import reducer from './reducer';
+{{/if}}
+
+export function {{ properCase name }}({ navigation, theme }) {
+  const { colors } = theme;
+  {{#if wantActionsAndReducer}}
+  useInjectReducer({ key: '{{ camelCase name }}', reducer });
+  {{/if}}
+  return (
+    <View style={[Helpers.fillRowCenter, styles.container]}>
+         <Text>This is your {{ properCase name }} Container</Text>
+    </View>
+  );
+}
+
+{{ properCase name }}.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  theme: PropTypes.object.isRequired,
+  navigation: PropTypes.func.isRequired,
+};
+
+{{#if wantActionsAndReducer}}
+const mapStateToProps = (state, props) => createStructuredSelector({
+  {{ camelCase name }}: makeSelect{{properCase name}}(state, props),
+});
+{{/if}}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+{{#if wantActionsAndReducer}}
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+{{else}}
+const withConnect = connect(null, mapDispatchToProps);
+{{/if}}
+
+export default compose(
+  withConnect,
+  withTheme,
+{{#if memo}}
+  memo,
+{{/if}}
+)({{ properCase name }});

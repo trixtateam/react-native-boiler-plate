@@ -1,0 +1,35 @@
+/**
+ *
+ * {{ properCase name }}
+ *
+ */
+
+{{#if memo}}
+import React, { memo } from 'react';
+{{else}}
+import React from 'react';
+{{/if}}
+import {
+    View,
+    Text,
+} from 'react-native';
+
+import { Helpers } from '../../theme';
+import styles from './{{properCase name}}Style';
+// import PropTypes from 'prop-types';
+
+function {{ properCase name }}({ theme }) {
+  return (
+    <View style={[Helpers.fillRowCenter, styles.container]}>
+          <Text>This is your {{ properCase name }} Component</Text>
+     </View>
+  );
+}
+
+{{ properCase name }}.propTypes = {};
+
+{{#if memo}}
+export default memo({{ properCase name }});
+{{else}}
+export default {{ properCase name }};
+{{/if}}

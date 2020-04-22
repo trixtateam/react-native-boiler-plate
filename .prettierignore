@@ -1,0 +1,11 @@
+build/
+node_modules/
+android/
+ios/
+internals/generators/
+app/utils/
+internals/scripts/
+package-lock.json
+yarn.lock
+package.json
+__tests__/**
