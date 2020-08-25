@@ -25,6 +25,7 @@ Here's a curated list of packages that you should be at least familiar with befo
 - [ ] [React Native Paper](https://callstack.github.io/react-native-paper/index.html)
 - [ ] [React Navigation](https://github.com/react-navigation/react-navigation)
 - [ ] [React Hook Form](https://github.com/react-hook-form/react-hook-form)
+- [ ] [React Native Rename](https://github.com/junedomingo/react-native-rename)
 ### Unit Testing
 
 - [ ] [Jest](http://facebook.github.io/jest/)
@@ -37,7 +38,7 @@ Here's a curated list of packages that you should be at least familiar with befo
 
 Note that while `react-native-boiler-plate` includes a lot of features, many of them are optional and you can find instructions in the docs on how to remove...
 
-- [...`phoenix` or `reselect`](https://github.com/trixtateam/react-native-boiler-plate/blob/master/docs/js/remove.md).
+- [...`redux-saga` or `reselect`](https://github.com/trixtateam/react-native-boiler-plate/blob/master/docs/js/remove.md).
 
 ## Project Structure
 
@@ -51,6 +52,26 @@ Let's start with understanding why we have chosen our particular structure.
 We use the [container/component architecture](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.4rmjqneiw). `containers/` contains React components which are connected to the redux store. `components/` contains dumb React components which depend on containers for data. **Container components care about how things work, while components care about how things look.**
 
 We've found that for many applications treating single pages (e.g. the LoginPage, the HomePage, etc.) as containers and their small parts (e.g. the Login form, the Navigation bar) as components works well, but there are no rigid rules. **Bend the architecture to the needs of your app, nothing is set in stone!**
+
+### `navigators/`
+Contains all react navigation to screens,tabs.
+
+### `sagas/index`
+Should you generate sagas for your containers, include them in root saga
+```JS
+export default function* root() {
+  yield all([
+    /**
+     * @see https://redux-saga.js.org/docs/basics/UsingSagaHelpers.html
+     */
+    // include container sagas here
+    homeScreenSaga(),
+    rootScreenSaga(),
+    loginScreenSaga(),
+    phoenixLoginScreenSaga(),
+  ]);
+}
+```
 
 ### `internals/`
 
