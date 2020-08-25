@@ -73,6 +73,9 @@ export default function* root() {
 }
 ```
 
+### `theme/`
+This directory contains base styles for the application
+
 ### `internals/`
 
 You can call this area the "engine" of your app. Your source code cannot be executed as-is in the web browser. It needs to pass through webpack to get converted into a version of Javascript that web browsers understand. While it's certainly helpful to understand what's happening here, for real world usage, you won't have to mess around with this folder much.
