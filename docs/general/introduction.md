@@ -13,7 +13,6 @@ Opening an issue is the fastest way to draw the attention of the team, but pleas
 Here's a curated list of packages that you should be at least familiar with before starting your awesome project. However, the best way to see a complete list of the dependencies is to check [package.json](https://github.com/trixtateam/react-native-boiler-plate/blob/master/package.json).
 
 ### Core
-
 - [ ] [React](https://facebook.github.io/react/)
 - [ ] [React Native](https://github.com/facebook/react-native/)
 - [ ] [Redux](http://redux.js.org/)
@@ -26,6 +25,7 @@ Here's a curated list of packages that you should be at least familiar with befo
 - [ ] [React Navigation](https://github.com/react-navigation/react-navigation)
 - [ ] [React Hook Form](https://github.com/react-hook-form/react-hook-form)
 - [ ] [React Native Rename](https://github.com/junedomingo/react-native-rename)
+- [ ] [Reactotron](https://github.com/infinitered/reactotron)
 ### Unit Testing
 
 - [ ] [Jest](http://facebook.github.io/jest/)

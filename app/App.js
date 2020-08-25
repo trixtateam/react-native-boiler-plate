@@ -19,6 +19,10 @@ enableScreens();
 const initialState = {};
 const store = configureStore(initialState, rootSaga);
 
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
 export default function App() {
   return (
     <Provider store={store}>
