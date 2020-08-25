@@ -31,6 +31,9 @@ export function* checkForTokenSaga() {
   }
 }
 
+/**
+ * Check for when signout button is presssed
+ */
 export function* signOutSaga() {
   try {
     const socket = yield select(makeSelectPhoenixSocket());
@@ -42,11 +45,16 @@ export function* signOutSaga() {
       yield removeLocalStorageItem(PHOENIX_DOMAIN);
       yield put(setAuthenticationToken({ token: false }));
     }
-  } catch (e) {
-    // Restoring token failed
-  }
+  } catch (e) {}
 }
 
+/**
+ * When the authentication token is updated from storage
+ * attempt to connect to phoenix
+ * @param {Object} params
+ * @param {Object} params.data
+ *
+ */
 export function* connectToPhoenixSaga({ data }) {
   if (data.token && data.token !== false) {
     const agentId = yield getLocalStorageItem(PHOENIX_AGENT);
@@ -58,7 +66,7 @@ export function* connectToPhoenixSaga({ data }) {
 
 /**
  * When a socket disconnection happens
- * and redirect to login page
+ * clear saved storaged
  */
 export function* socketDisconnectionSaga({ isAnonymous }) {
   if (!isAnonymous) {
@@ -103,6 +111,16 @@ export function* channelErrorSaga({ error }) {
 }
 
 /**
+ * If an error happens on a phoenix channel
+ * @param {Object} params
+ * @param {Object} params.error - error response
+ * @param {string} params.channelTopic - name of phoenix channel
+ */
+export function* channelPushErrorSaga({ error }) {
+  yield put(updateError({ error }));
+}
+
+/**
  * After joining a phoenix channel
  * @param response
  * @param channel
@@ -112,13 +130,12 @@ export function* handleChannelJoinSaga(data) {
   console.info('handleChannelJoinSaga', data);
 }
 
-// Individual exports for testing
 export default function* rootScreenSaga() {
   yield takeLatest(CHECK_FOR_AUTHENTICATION_TOKEN, checkForTokenSaga);
   yield takeLatest(SIGN_OUT, signOutSaga);
   yield takeEvery(socketActionTypes.SOCKET_DISCONNECT, socketDisconnectionSaga);
   yield takeEvery(socketActionTypes.SOCKET_OPEN, socketConnectedSaga);
-  yield takeEvery(channelActionTypes.CHANNEL_PUSH_ERROR, channelErrorSaga);
+  yield takeEvery(channelActionTypes.CHANNEL_PUSH_ERROR, channelPushErrorSaga);
   yield takeEvery(channelActionTypes.CHANNEL_JOIN_ERROR, channelJoinErrorSaga);
   yield takeEvery(channelActionTypes.CHANNEL_JOIN, handleChannelJoinSaga);
   yield takeLatest(SET_AUTHENTICATION_TOKEN, connectToPhoenixSaga);
