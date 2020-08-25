@@ -75,6 +75,7 @@
     "plop": "2.3.0",
     "prettier": "1.17.0",
     "react-native-clean-project": "^3.3.0",
+    "react-native-rename": "^2.4.1",
     "react-test-renderer": "16.9.0",
     "remote-redux-devtools": "^0.5.16",
     "rimraf": "2.6.3",
