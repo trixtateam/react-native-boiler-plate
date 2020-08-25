@@ -1,11 +1,20 @@
 # Command Line Commands
 ## Development
-
+### IOS
+```Shell
+npm run ios
+```
+### Android
 ```Shell
 npm run android
 ```
-
 Starts the metro server running on `http://localhost:8081`
+
+## Reset
+Reset react native cache
+```Shell
+npm run reset
+```
 
 ## Generators
 
@@ -57,3 +66,24 @@ npm run pretier-fix
 ```
 
 Pretify your code and tries to fix any errors it finds.
+
+
+## Rename app
+[react-native-rename](https://github.com/junedomingo/react-native-rename)
+Rename your application to whatever you want. Beaware of the [issue](https://github.com/junedomingo/react-native-rename/issues/72) deleting your android files. Discard local git changes and move the files
+over to the new folder name location. android\app\src\main\java\
+```Shell
+npx react-native-rename 'nameofapp'
+```
+
+## Debugging
+
+### Android
+```Shell
+npm run android-logging
+```
+
+### IOS
+```Shell
+npm run ios-logging
+```
