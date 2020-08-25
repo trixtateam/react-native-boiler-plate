@@ -2,7 +2,6 @@
 import loginScreenReducer, { initialState } from '../reducer';
 // import { someAction } from '../actions';
 
-/* eslint-disable default-case, no-param-reassign */
 describe('loginScreenReducer', () => {
   let state;
   beforeEach(() => {

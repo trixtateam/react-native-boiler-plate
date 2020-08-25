@@ -4,15 +4,14 @@
 
 import { combineReducers } from 'redux';
 import appReducer from './containers/App/reducer';
-import socketReducer from './phoenix/reducer';
-
+import { phoenixReducer } from '@trixta/phoenix-to-redux';
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     global: appReducer,
-    phoenix: socketReducer,
+    phoenix: phoenixReducer,
     ...injectedReducers,
   });
 

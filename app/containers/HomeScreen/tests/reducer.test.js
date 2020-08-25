@@ -2,7 +2,6 @@
 import homeScreenReducer, { initialState } from '../reducer';
 // import { someAction } from '../actions';
 
-/* eslint-disable default-case, no-param-reassign */
 describe('homeScreenReducer', () => {
   let state;
   beforeEach(() => {

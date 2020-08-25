@@ -1,25 +1,11 @@
 # Command Line Commands
-
-## Initialization
-
-```Shell
-npm run setup
-```
-
-Initializes a new project with this boilerplate. Deletes the `react-native-boiler-plate`
-git history, installs the dependencies and initializes a new repository.
-
-> Note: This command is self-destructive, once you've run it the init script is
-> gone forever. This is for your own safety, so you can't delete your project's
-> history irreversibly by accident.
-
 ## Development
 
 ```Shell
 npm run android
 ```
 
-Starts the development server running on `http://localhost:3000`
+Starts the metro server running on `http://localhost:8081`
 
 ## Generators
 
@@ -43,7 +29,7 @@ npm test
 ```
 
 Tests your application with the unit tests specified in the `**/tests/*.js` files
-throughout the application.  
+throughout the application.
 All the `test` commands allow an optional `-- [string]` argument to filter
 the tests run by Jest. Useful if you need to run a specific test only.
 

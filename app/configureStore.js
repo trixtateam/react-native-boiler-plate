@@ -2,10 +2,12 @@
  * Create the store with dynamic reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { createPhoenixChannelMiddleware } from '@trixta/phoenix-to-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
+const phoenixChannelMiddleWare = createPhoenixChannelMiddleware();
 
 export default function configureStore(initialState = {}, rootSaga) {
   let composeEnhancers = composeWithDevTools;
@@ -24,14 +26,14 @@ export default function configureStore(initialState = {}, rootSaga) {
     //   reduxSagaMonitorOptions = {
     //     sagaMonitor: window.__SAGA_MONITOR_EXTENSION__,
     //   };
-    /* eslint-enable */
   }
 
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
   // Create the store with two middleWares
   // 1. sagaMiddleware: Makes redux-sagas work
-  const middleWares = [sagaMiddleware];
+  // 2. phoenixChannelMiddleWare: integrates phoenix channels with redux
+  const middleWares = [sagaMiddleware, phoenixChannelMiddleWare];
 
   const enhancers = [applyMiddleware(...middleWares)];
 

@@ -14,7 +14,7 @@
   - [Unit Testing](testing/unit-testing.md)
   - [Component Testing](testing/component-testing.md)
 - [JS](js)
-  - [PhoenixJS](js/phoenix-js.md)
+  - [Phoenix-to-redux](https://github.com/trixtateam/phoenix-to-redux)
   - [Redux](js/redux.md)
   - [Immer](docs/js/immer.md)
   - [reselect](js/reselect.md)
@@ -26,8 +26,7 @@
 
 ### Structure
 
-The [`app/`](../../../tree/master/app) directory contains your entire application code, including CSS,
-JavaScript, HTML and tests.
+The [`app/`](../../../tree/master/app) directory contains your entire application code, theme styles, sagas, screens, navigators
 
 The rest of the folders and files only exist to make your life easier, and
 should not need to be touched.

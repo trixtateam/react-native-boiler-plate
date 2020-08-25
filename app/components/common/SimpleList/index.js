@@ -8,7 +8,6 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './SimpleListStyle';
 import PropTypes from 'prop-types';
-import Loading from '../Loading';
 import { ListItem } from 'react-native-elements';
 import ApplicationStyles from '../../../theme/ApplicationStyles';
 

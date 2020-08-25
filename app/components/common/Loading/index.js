@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator, Colors } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import styles from './LoadingStyle';
 import PropTypes from 'prop-types';
 

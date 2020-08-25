@@ -1,7 +1,12 @@
 // import { take, call, put, select } from 'redux-saga/effects';
 
 // Individual exports for testing
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
+import {
+  connectPhoenix,
+  getAnonymousPhoenixChannel,
+  pushToPhoenixChannel,
+} from '@trixta/phoenix-to-redux';
 import {
   DEFAULT_ACTION,
   REQUEST_AUTHENTICATION,
@@ -9,49 +14,45 @@ import {
   REQUEST_AUTHENTICATION_SUCCESS,
   REQUEST_AUTHENTICATION_TIME_OUT,
 } from './constants';
-import {
-  AGENT_ID,
-  PHOENIX_TOKEN,
-  SOCKET_DOMAIN,
-  socketChannels,
-  socketEvents,
-} from '../../phoenix/constants';
 import { loading, resetError, updateCurrentUser, updateError } from '../App/actions';
 import { get } from 'lodash';
-import { formatSocketDomain, setLocalStorageItem } from '../../phoenix/utils';
-import { getAnonymousChannel } from '../../phoenix/socketSagas';
-import { connectSocket, disconnectSocket, pushToChannel } from '../../phoenix/actions';
 import { requestAuthenticationFailed } from './actions';
-import { makeSelectSocket } from '../../phoenix/selectors';
+import { setLocalStorageItem } from '../../utils/helpers';
+import { socketChannels, socketEvents } from '../../phoenix/constants';
+import { PHOENIX_DOMAIN, PHOENIX_TOKEN, PHOENIX_AGENT } from '../App/constants';
 
-export function* loginSaga({ dispatch, data }) {
+export function* loginSaga({ data }) {
   try {
-    const channelName = socketChannels.AUTHENTICATION;
     yield put(loading({}));
-    const domainDetails = get(data, 'domain', '');
-    const domain = formatSocketDomain({ domainString: domainDetails });
-    yield setLocalStorageItem(SOCKET_DOMAIN, domain);
-    const socket = yield getAnonymousChannel({ dispatch, channelName });
-    yield pushToChannel({
-      dispatch,
-      channelName,
-      eventName: socketEvents.LOGIN,
-      customOKResponseEvent: REQUEST_AUTHENTICATION_SUCCESS,
-      customErrorResponseEvent: REQUEST_AUTHENTICATION_FAILURE,
-      requestData: data,
-      extraData: { domain },
-      socket,
-      dispatchGlobalError: false,
-      customTimeoutEvent: REQUEST_AUTHENTICATION_TIME_OUT,
-      defaultTimeout: 5000,
-    });
+    const domainUrl = get(data, 'domain', '');
+    const channelTopic = socketChannels.AUTHENTICATION;
+    setLocalStorageItem(PHOENIX_DOMAIN, domainUrl);
+    yield put(
+      getAnonymousPhoenixChannel({
+        domainUrl,
+        channelTopic,
+      }),
+    );
+    yield put(
+      pushToPhoenixChannel({
+        channelTopic,
+        eventName: socketEvents.LOGIN,
+        channelResponseEvent: REQUEST_AUTHENTICATION_SUCCESS,
+        channelErrorResponseEvent: REQUEST_AUTHENTICATION_FAILURE,
+        requestData: data,
+        additionalData: { domainUrl },
+        dispatchChannelError: false,
+        channelTimeOutEvent: REQUEST_AUTHENTICATION_TIME_OUT,
+        channelPushTimeOut: 5000,
+      }),
+    );
   } catch (error) {
     yield put(requestAuthenticationFailed({ error: error.toString() }));
     yield put(updateError({ error: error.toString() }));
   }
 }
 
-export function* handleLoginTimeoutSaga({ dispatch }) {
+export function* handleLoginTimeoutSaga() {
   yield put(
     updateError({
       error: 'Server is taking longer than expected to respond. Please try again later .',
@@ -59,22 +60,25 @@ export function* handleLoginTimeoutSaga({ dispatch }) {
   );
 }
 
-export function* handleLoginSuccessSaga({ data, dispatch }) {
+export function* handleLoginSuccessSaga({ data }) {
   if (data) {
-    const domain = get(data, 'domain', '');
+    const domainUrl = get(data, 'domainUrl', '');
     const agentId = get(data, 'agent_id', '');
     const token = get(data, 'jwt', '');
-    const roles = get(data, 'role_ids', '');
-    yield setLocalStorageItem(PHOENIX_TOKEN, token);
-    yield setLocalStorageItem(AGENT_ID, agentId);
-    yield put(updateCurrentUser({ agentId, token, roles, dispatch }));
-    const socket = yield select(makeSelectSocket());
-    disconnectSocket(socket);
-    yield put(connectSocket({ dispatch, agentId, token, domain }));
+    setLocalStorageItem(PHOENIX_TOKEN, token);
+    setLocalStorageItem(PHOENIX_AGENT, agentId);
+    yield put(updateCurrentUser({ agentId, token }));
+    yield put(
+      connectPhoenix({
+        token,
+        agentId,
+        domainUrl,
+      }),
+    );
   }
 }
 
-export function* handleLoginFailureSaga({ error, dispatch }) {
+export function* handleLoginFailureSaga({ error }) {
   yield put(
     updateError({
       error: get(error, 'reason', 'Authentication Failed'),
@@ -82,7 +86,7 @@ export function* handleLoginFailureSaga({ error, dispatch }) {
   );
 }
 
-export function* handleDefaultActionSaga({ dispatch }) {
+export function* handleDefaultActionSaga() {
   yield put(resetError());
 }
 

@@ -30,39 +30,34 @@ import {
   CHECK_FOR_AUTHENTICATION_TOKEN,
 } from './constants';
 
-export function updateCurrentUser({ agentId, token, roles, dispatch }) {
+export function updateCurrentUser({ agentId, token }) {
   return {
     type: UPDATE_CURRENT_USER,
-    dispatch,
     data: {
       user: agentId,
       token,
-      roles,
     },
   };
 }
 
-export function signOut({ dispatch }) {
+export function signOut() {
   return {
     type: SIGN_OUT,
-    dispatch,
   };
 }
 
-export function setAuthenticationToken({ dispatch, token }) {
+export function setAuthenticationToken({ token }) {
   return {
     type: SET_AUTHENTICATION_TOKEN,
-    dispatch,
     data: {
       token,
     },
   };
 }
 
-export function checkForToken({ dispatch }) {
+export function checkForToken() {
   return {
     type: CHECK_FOR_AUTHENTICATION_TOKEN,
-    dispatch,
   };
 }
 

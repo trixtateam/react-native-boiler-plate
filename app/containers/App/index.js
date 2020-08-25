@@ -34,11 +34,11 @@ import { screenNames } from '../../navigators/RouteNames';
 import Animated from 'react-native-reanimated';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AppScreenTabs from '../../navigators/AppScreenTabs';
-import { getLocalStorageItem, setLocalStorageItem } from '../../phoenix/utils';
 import { PERSISTENCE_KEY, THEME_PERSISTENCE_KEY } from './constants';
 import { navigationRef, isMountedRef } from '../../navigators/RootNavigation';
 import DrawerSettingsItem from '../../components/common/DrawerSettingsItem';
 import { fontConfig } from '../../theme/Fonts';
+import { setLocalStorageItem, getLocalStorageItem } from '../../utils/helpers';
 
 const RootStack = createStackNavigator();
 const AppDrawer = createDrawerNavigator();
@@ -74,10 +74,12 @@ function AppDrawerContent({ dispatchSignOut, setTheme, theme, progress, ...rest 
   );
 }
 
-function RootStackScreen({ currentSession, dispatchCheckForToken, dispatchSignOut }) {
+function RootStackScreen({ dispatch, currentSession, dispatchSignOut }) {
   const [dimensions, setDimensions] = React.useState(Dimensions.get('window'));
   const [theme, setTheme] = React.useState(DefaultTheme);
-
+  const dispatchCheckForToken = React.useCallback(() => {
+    dispatch(checkForToken());
+  }, [dispatch]);
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
 
@@ -128,7 +130,7 @@ function RootStackScreen({ currentSession, dispatchCheckForToken, dispatchSignOu
 
   React.useEffect(() => {
     // check if the user is logged in or not
-    dispatchCheckForToken();
+    dispatchCheckForToken && dispatchCheckForToken();
   }, [currentSession, dispatchCheckForToken]);
 
   React.useEffect(() => {
@@ -206,8 +208,8 @@ function RootStackScreen({ currentSession, dispatchCheckForToken, dispatchSignOu
 }
 
 RootStackScreen.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  dispatchCheckForToken: PropTypes.func,
+  dispatch: PropTypes.func,
+  dispatchSignOut: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) =>
@@ -218,11 +220,8 @@ const mapStateToProps = (state, props) =>
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    dispatchCheckForToken: () => {
-      dispatch(checkForToken({ dispatch }));
-    },
     dispatchSignOut: () => {
-      dispatch(signOut({ dispatch }));
+      dispatch(signOut());
     },
   };
 }

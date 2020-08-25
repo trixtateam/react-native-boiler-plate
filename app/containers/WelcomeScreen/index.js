@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -58,8 +57,6 @@ export function WelcomeScreen({}) {
     </>
   );
 }
-
-WelcomeScreen.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({});
 

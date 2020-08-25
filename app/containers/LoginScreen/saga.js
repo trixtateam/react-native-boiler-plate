@@ -14,8 +14,8 @@ import {
   updateError,
 } from '../App/actions';
 import { requestAuthenticationFailed, requestAuthenticationSuccess } from './actions';
-import { setLocalStorageItem } from '../../phoenix/utils';
-import { PHOENIX_TOKEN } from '../../phoenix/constants';
+import { setLocalStorageItem } from '../../utils/helpers';
+import { PHOENIX_TOKEN } from '../App/constants';
 
 export function* loginSaga({ dispatch, data }) {
   try {
@@ -29,15 +29,15 @@ export function* loginSaga({ dispatch, data }) {
   }
 }
 
-export function* handleLoginSuccessSaga({ data, dispatch }) {
+export function* handleLoginSuccessSaga({ data }) {
   if (data) {
     yield setLocalStorageItem(PHOENIX_TOKEN, data.identity);
-    yield put(updateCurrentUser({ agentId: data.identity, dispatch, token: true }));
-    yield put(setAuthenticationToken({ dispatch, token: true }));
+    yield put(updateCurrentUser({ agentId: data.identity, token: true }));
+    yield put(setAuthenticationToken({ token: true }));
   }
 }
 
-export function* handleLoginFailureSaga({ error, dispatch }) {
+export function* handleLoginFailureSaga({ error }) {
   yield put(
     updateError({
       error: get(error, 'reason', 'Authentication Failed'),
@@ -45,7 +45,7 @@ export function* handleLoginFailureSaga({ error, dispatch }) {
   );
 }
 
-export function* handleDefaultActionSaga({ dispatch }) {
+export function* handleDefaultActionSaga() {
   yield put(resetError());
 }
 // Individual exports for testing

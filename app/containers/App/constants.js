@@ -26,3 +26,6 @@ export const SIGN_OUT = `${name}/App/SIGN_OUT`;
 
 export const THEME_PERSISTENCE_KEY = `${name}/App/THEME_TYPE`;
 export const PERSISTENCE_KEY = `${name}/App/NAVIGATION_STATE`;
+export const PHOENIX_TOKEN = `${name}/App/PHOENIX_TOKEN`;
+export const PHOENIX_AGENT = `${name}/App/PHOENIX_AGENT`;
+export const PHOENIX_DOMAIN = `${name}/App/PHOENIX_DOMAIN`;

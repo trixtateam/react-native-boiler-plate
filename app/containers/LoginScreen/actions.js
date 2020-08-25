@@ -18,18 +18,16 @@ export function defaultAction() {
   };
 }
 
-export function requestAuthentication({ dispatch, data }) {
+export function requestAuthentication({ data }) {
   return {
     type: REQUEST_AUTHENTICATION,
-    dispatch,
     data,
   };
 }
 
-export function requestAuthenticationSuccess({ dispatch, data }) {
+export function requestAuthenticationSuccess({ data }) {
   return {
     type: REQUEST_AUTHENTICATION_SUCCESS,
-    dispatch,
     data,
   };
 }

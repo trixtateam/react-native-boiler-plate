@@ -1,20 +1,14 @@
 # Frequently Asked Questions
 
-- [Where are Babel, Prettier and ESLint configured?](#where-are-babel-prettier-and-eslint-configured)
-- [Non-route containers](#non-route-containers)
-  - [Where do I put the reducer?](#where-do-i-put-the-reducer)
-- [How to keep my project up-to-date with `react-native-boiler-plate`?](#how-to-keep-my-project-up-to-date-with-react-native-boiler-plate)
-- [Have another question?](#have-another-question)
+- [Frequently Asked Questions](#frequently-asked-questions)
+  - [Where are Babel, Prettier and ESLint configured?](#where-are-babel-prettier-and-eslint-configured)
+    - [Where do I put the reducer?](#where-do-i-put-the-reducer)
+  - [How to keep my project up-to-date with `react-native-boiler-plate`?](#how-to-keep-my-project-up-to-date-with-react-native-boiler-plate)
+  - [Have another question?](#have-another-question)
 
 ## Where are Babel, Prettier and ESLint configured?
 
 ESLint, Babel and Prettier all have their own config files in the root of the project. Same for Jest and stylelint.
-
-
-## Non-route containers
-
-> Note: Container will always be nested somewhere below a route. Even if there's dozens of components
-> in between, somewhere up the tree will be route. (maybe only "/", but still a route)
 
 ### Where do I put the reducer?
 

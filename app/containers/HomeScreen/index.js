@@ -36,7 +36,10 @@ export function HomeScreen({
   return (
     <View style={styles.container}>
       <Header
-        centerComponent={{ text: 'SEARCH GITHUB REPOSITORIES', style: { color: Colors.white } }}
+        centerComponent={{
+          text: 'SEARCH GITHUB REPOSITORIES',
+          style: { color: Colors.white },
+        }}
       />
       <View style={styles.usernameContainer}>
         <View>
@@ -45,6 +48,7 @@ export function HomeScreen({
             leftIcon={<Icon name="at" size={24} color={Colors.grey} />}
             autoFocus
             placeholder="username"
+            // eslint-disable-next-line react-native/no-inline-styles
             containerStyle={{ width: 250 }}
             value={username}
             onChange={dispatchChangeUsername}
