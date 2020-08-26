@@ -1,3 +1,35 @@
+## Removing `phoenix`
+
+**app/configureStore.js**
+
+1.  Remove statement `import { createPhoenixChannelMiddleware } from '@trixta/phoenix-to-redux';`.
+2.  Remove statement `const phoenixChannelMiddleWare = createPhoenixChannelMiddleware();`.
+3.  Remove `phoenixChannelMiddleWare` from `middlewares` array.
+
+**app/reducers.js**
+
+1.  Remove statement `import { phoenixReducer } from '@trixta/phoenix-to-redux';`.
+2.  Remove statement `phoenix: phoenixReducer,`.
+
+**app/containers/App/saga.js**
+
+1. remove phoenix saga listeners and functions from `rootScreenSaga`
+
+**app/containers/PhoenixLoginScreen/**
+
+1. Delete entire folder
+
+**app/navigators/AuthenticationScreenStack.js**
+
+1. Remove `AuthenticationTabs.Screen` section related to PhoenixLoginScreen
+
+
+**Finally, remove it from the `package.json`.
+
+1.  Remove `@trixta/phoenix-to-redux` from `dependencies`
+2.  Remove `phoenix` from `dependencies`
+
+
 ## Removing `redux-saga`
 
 **We don't recommend removing `redux-saga`**, as we strongly feel that it's the
@@ -52,3 +84,23 @@ side-effect management library you want to use!**
 
 To remove `reselect`, remove it from your dependencies in `package.json` and then write
 your `mapStateToProps` functions like you normally would!
+
+## Removing `reactotron`
+
+**app/configureStore.js**
+1.  Remove statement `import Reactotron from './ReactotronConfig';`.
+2.  Remove statement `const sagaMonitor = Reactotron.createSagaMonitor();`.
+3.  Remove statement `enhancers.push(Reactotron.createEnhancer())`.
+
+**app/ReactotronConfig.js**
+
+1.  Delete file.
+
+**app/App.js**
+1.  Remove statement `import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));`.
+
+**Finally, remove it from the `package.json`.
+
+1.  Remove `reactotron-react-native` from `dependencies`
+2.  Remove `reactotron-redux` from `dependencies`
+3.  Remove `reactotron-redux-saga` from `dependencies`

@@ -154,3 +154,26 @@ This boilerplate includes a complete static code analysis setup. It's composed o
 We recommend that you install the relevant IDE extensions for each one of these tools. Once you do, every time you'll press save, all your code will be formatted and reviewed for quality automatically. (Read more at [editor.md](./editor.md).)
 
 We've also set up a git hook to automatically analyze and fix linting errors before your code is committed. If you'd like to disable it or modify its behavior, take a look at the `lint-staged` section in `package.json`.
+
+## Example Application
+### Login screens
+The example has two login screens, one to use phoenix channels to login and the other just a normal login screen.
+
+<img src="../images/login-screen.png" alt="login screen" align="middle" />
+
+<img src="../images/phoenix-login-screen.png" alt="login screen" align="middle" />
+
+### Welcome Screen
+After login you should see the welcome screen
+
+<img src="../images/welcome-screen.png" alt="login screen" width="200" align="middle" />
+
+### Home Screen
+If you click the home tab, you can type in a github username to load repositories for that user
+
+<img src="../images/home-screen.png" alt="login screen" width="200" align="middle" />
+
+### Sidebar
+If you use a right pull side gesture the sidebar will come out, allowing you to change the theme and sign out.
+
+<img src="../images/side-bar.png" alt="login screen" width="200" align="middle" />

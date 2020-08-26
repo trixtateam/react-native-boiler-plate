@@ -62,12 +62,6 @@ Most of the errors/warnings would go away once you roll back the problematic dep
 
 ## :spiral_notepad: Notes
 
-1.  `react-router` was not updated. Thanks to @anuraaga for all his work. Ref- #1746
-2.  `history` was not updated because of `react-router v3`'s dependency on it. Should go away when #1746 is merged.
-3.  `react-test-renderer` was added as a dev-dependency because enzyme was showing warnings-
-    > A few deprecation warnings were added in React 15.5. This supports the new APIs that React recommends. Ref. [#876](https://github.com/airbnb/enzyme/pull/876)
-4.  If you see a package-name being repeated, note that the version number of the last occurrence will get precedence.
-
 ## :package: Version Diff
 
 **[0] PATCH UPDATES**

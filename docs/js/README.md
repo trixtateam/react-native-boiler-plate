@@ -8,7 +8,7 @@ via [`reselect`](reselect.md).
 
 For managing asynchronous flows (e.g. logging in) we use [`redux-saga`](redux-saga.md).
 
-For routing, we use [`react-navigation`](routing.md).
+For routing, we use [`react-navigation`](https://reactnavigation.org/docs/getting-started).
 
 We include a generator for components, containers, sagas, routes and selectors.
 Run `npm run generate` to choose from the available generators, and automatically

@@ -12,9 +12,9 @@ const phoenixChannelMiddleWare = createPhoenixChannelMiddleware();
 
 export default function configureStore(initialState = {}, rootSaga) {
   let composeEnhancers = composeWithDevTools;
-  // create our new saga monitor
+  // 1. Reactotron sagaMonitor
   const sagaMonitor = Reactotron.createSagaMonitor();
-  const reduxSagaMonitorOptions = { sagaMonitor };
+  const reduxSagaMonitorOptions = __DEV__ ? { sagaMonitor } : {};
 
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
@@ -24,6 +24,7 @@ export default function configureStore(initialState = {}, rootSaga) {
   const middleWares = [sagaMiddleware, phoenixChannelMiddleWare];
 
   const enhancers = [applyMiddleware(...middleWares)];
+
   if (__DEV__) {
     enhancers.push(Reactotron.createEnhancer());
   }
