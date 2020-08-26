@@ -159,9 +159,9 @@ We've also set up a git hook to automatically analyze and fix linting errors bef
 ### Login screens
 The example has two login screens, one to use phoenix channels to login and the other just a normal login screen.
 
-<img src="../images/login-screen.png" alt="login screen" align="middle" />
+<img src="../images/login-screen.png" alt="login screen" width="200" align="middle" />
 
-<img src="../images/phoenix-login-screen.png" alt="login screen" align="middle" />
+<img src="../images/phoenix-login-screen.png" alt="phoenix login screen" width="200" align="middle" />
 
 ### Welcome Screen
 After login you should see the welcome screen
