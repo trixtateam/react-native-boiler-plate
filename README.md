@@ -2,20 +2,15 @@
 
 <br />
 
+![GitHub Release Date](https://img.shields.io/github/release-date/trixtateam/react-native-boiler-plate?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/trixtateam/react-native-boiler-plate?style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/trixtateam/react-native-boiler-plate?style=for-the-badge)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/trixtateam/react-native-boiler-plate/latest?style=for-the-badge)
+![GitHub top language](https://img.shields.io/github/languages/top/trixtateam/react-native-boiler-plate?style=for-the-badge)
+
 <div align="center"><strong>Start your next react native project in seconds</strong></div>
 <br />
 
-<div align="center">
-  <!-- Dependency Status -->
-  <a href="https://david-dm.org/trixtateam/react-native-boiler-plate">
-    <img src="https://david-dm.org/trixtateam/react-native-boiler-plate.svg" alt="Dependency Status" />
-  </a>
-  <!-- devDependency Status -->
-  <a href="https://david-dm.org/trixtateam/react-native-boiler-plate#info=devDependencies">
-    <img src="https://david-dm.org/trixtateam/react-native-boiler-plate/dev-status.svg" alt="devDependency Status" />
-  </a>
-</div>
-<br />
 <br />
 <div align="center">
   <sub>Inspired by <a href="https://twitter.com/mxstbr">Max Stoiber's</a> <a href="https://github.com/react-boilerplate/react-boilerplate">React Boiler Plate</a>.</sub>
