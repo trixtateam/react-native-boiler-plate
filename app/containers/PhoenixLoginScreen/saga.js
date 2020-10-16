@@ -2,11 +2,7 @@
 
 // Individual exports for testing
 import { put, takeLatest } from 'redux-saga/effects';
-import {
-  connectPhoenix,
-  getAnonymousPhoenixChannel,
-  pushToPhoenixChannel,
-} from '@trixta/phoenix-to-redux';
+import { connectPhoenix, getPhoenixChannel, pushToPhoenixChannel } from '@trixta/phoenix-to-redux';
 import {
   DEFAULT_ACTION,
   REQUEST_AUTHENTICATION,
@@ -27,8 +23,9 @@ export function* loginSaga({ data }) {
     const domainUrl = get(data, 'domain', '');
     const channelTopic = socketChannels.AUTHENTICATION;
     setLocalStorageItem(PHOENIX_DOMAIN, domainUrl);
+    yield put(connectPhoenix({ domainUrl }));
     yield put(
-      getAnonymousPhoenixChannel({
+      getPhoenixChannel({
         domainUrl,
         channelTopic,
       }),
@@ -68,13 +65,7 @@ export function* handleLoginSuccessSaga({ data }) {
     setLocalStorageItem(PHOENIX_TOKEN, token);
     setLocalStorageItem(PHOENIX_AGENT, agentId);
     yield put(updateCurrentUser({ agentId, token }));
-    yield put(
-      connectPhoenix({
-        token,
-        agentId,
-        domainUrl,
-      }),
-    );
+    yield put(connectPhoenix({ params: { token, agent_id: agentId }, domainUrl }));
   }
 }
 
