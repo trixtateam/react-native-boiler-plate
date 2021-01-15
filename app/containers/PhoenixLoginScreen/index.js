@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import styles from './PhoenixLoginScreenStyle';
-import { useInjectReducer } from '../../utils/injectReducer';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import reducer from './reducer';
 import { Controller, useForm } from 'react-hook-form';
 import SnackBarMessage from '../../components/common/SnackBarMessage';
@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { makeSelectIsLoggingIn, makeSelectSuccess } from './selectors';
 import { makeSelectError } from '../App/selectors';
 import { defaultAction, requestAuthentication } from './actions';
+import saga from './saga';
 
 export function PhoenixLoginScreen({
   dispatchRequestAuthentication,
@@ -33,6 +34,7 @@ export function PhoenixLoginScreen({
   theme,
 }) {
   useInjectReducer({ key: 'phoenixLoginScreen', reducer });
+  useInjectSaga({ key: 'phoenixLoginScreen', saga });
   const { control, handleSubmit, errors } = useForm();
   const { colors } = theme;
   return (

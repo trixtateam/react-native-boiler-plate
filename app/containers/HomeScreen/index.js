@@ -19,10 +19,11 @@ import { changeUsername } from './actions';
 import { loadRepos } from '../App/actions';
 import reducer from './reducer';
 import SimpleList from '../../components/common/SimpleList';
-import { useInjectReducer } from '../../utils/injectReducer';
 import { Colors } from '../../theme';
 import LoadingStatusContainer from '../../components/common/LoadingStatusContainer';
 import { LOADING_STATUS } from './constants';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import saga from './saga';
 
 export function HomeScreen({
   username,
@@ -33,6 +34,7 @@ export function HomeScreen({
   dispatchChangeUsername,
 }) {
   useInjectReducer({ key: 'homeScreen', reducer });
+  useInjectSaga({ key: 'homeScreen', saga });
   return (
     <View style={styles.container}>
       <Header

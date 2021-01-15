@@ -126,9 +126,7 @@ export function* channelPushErrorSaga({ error }) {
  * @param channel
  * @returns {IterableIterator<*>}
  */
-export function* handleChannelJoinSaga(data) {
-  console.info('handleChannelJoinSaga', data);
-}
+export function* handleChannelJoinSaga(data) {}
 
 export default function* rootScreenSaga() {
   yield takeLatest(CHECK_FOR_AUTHENTICATION_TOKEN, checkForTokenSaga);

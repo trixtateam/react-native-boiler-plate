@@ -23,15 +23,21 @@ import { compose } from 'redux';
 import { Helpers } from '../../theme';
 import styles from './{{properCase name}}Style';
 {{#if wantActionsAndReducer}}
-import { useInjectReducer } from '../../utils/injectReducer'
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
+{{/if}}
+{{#if wantSaga}}
+import saga from './saga';
 {{/if}}
 
 export function {{ properCase name }}({ navigation, theme }) {
   const { colors } = theme;
   {{#if wantActionsAndReducer}}
   useInjectReducer({ key: '{{ camelCase name }}', reducer });
+  {{/if}}
+  {{#if wantSaga}}
+  useInjectSaga({ key: '{{ camelCase name }}', saga });
   {{/if}}
   return (
     <View style={[Helpers.fillRowCenter, styles.container]}>

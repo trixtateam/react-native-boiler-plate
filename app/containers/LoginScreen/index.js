@@ -15,12 +15,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import styles from './LoginScreenStyle';
-import { useInjectReducer } from '../../utils/injectReducer';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { makeSelectIsLoggingIn, makeSelectSuccess } from './selectors';
 import reducer from './reducer';
 import { defaultAction, requestAuthentication } from './actions';
 import SnackBarMessage from '../../components/common/SnackBarMessage';
 import { makeSelectError } from '../App/selectors';
+import saga from './saga';
 
 export function LoginScreen({
   dispatchRequestAuthentication,
@@ -32,6 +33,7 @@ export function LoginScreen({
   theme,
 }) {
   useInjectReducer({ key: 'loginScreen', reducer });
+  useInjectSaga({ key: 'loginScreen', saga });
   const { control, handleSubmit, errors } = useForm();
   const { colors } = theme;
   return (

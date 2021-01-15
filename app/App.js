@@ -7,17 +7,13 @@ import React from 'react';
 import { YellowBox } from 'react-native';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
-import configureStore from './configureStore';
-import rootSaga from './sagas/index';
+import store from './configureStore';
 
 import RootStackScreen from './containers/App';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Warning: Async Storage']);
 
 enableScreens();
-
-const initialState = {};
-const store = configureStore(initialState, rootSaga);
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));

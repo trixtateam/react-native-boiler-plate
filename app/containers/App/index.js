@@ -39,6 +39,8 @@ import { navigationRef, isMountedRef } from '../../navigators/RootNavigation';
 import DrawerSettingsItem from '../../components/common/DrawerSettingsItem';
 import { fontConfig } from '../../theme/Fonts';
 import { setLocalStorageItem, getLocalStorageItem } from '../../utils/helpers';
+import { useInjectSaga, SagaInjectionModes } from 'redux-injectors';
+import saga from './saga';
 
 const RootStack = createStackNavigator();
 const AppDrawer = createDrawerNavigator();
@@ -75,6 +77,7 @@ function AppDrawerContent({ dispatchSignOut, setTheme, theme, progress, ...rest 
 }
 
 function RootStackScreen({ dispatch, currentSession, dispatchSignOut }) {
+  useInjectSaga({ key: 'rootScreen', saga, mode: SagaInjectionModes.DAEMON });
   const [dimensions, setDimensions] = React.useState(Dimensions.get('window'));
   const [theme, setTheme] = React.useState(DefaultTheme);
   const dispatchCheckForToken = React.useCallback(() => {
