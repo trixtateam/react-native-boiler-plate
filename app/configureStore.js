@@ -2,7 +2,7 @@
  * Create the store with dynamic reducers
  */
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { createInjectorsEnhancer } from 'redux-injectors'
+import { createInjectorsEnhancer } from 'redux-injectors';
 import { createPhoenixChannelMiddleware } from '@trixta/phoenix-to-redux';
 import Reactotron from './ReactotronConfig';
 import createSagaMiddleware from 'redux-saga';
