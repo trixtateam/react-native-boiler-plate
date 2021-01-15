@@ -15,6 +15,7 @@ Here's a curated list of packages that you should be at least familiar with befo
 ### Core
 - [ ] [React](https://facebook.github.io/react/)
 - [ ] [React Native](https://github.com/facebook/react-native/)
+- [ ] [redux-injectors](https://github.com/react-boilerplate/redux-injectors)
 - [ ] [Redux](http://redux.js.org/)
 - [ ] [Redux Saga](https://redux-saga.github.io/redux-saga/)
 - [ ] [Reselect](https://github.com/reactjs/reselect)
@@ -55,23 +56,6 @@ We've found that for many applications treating single pages (e.g. the LoginPage
 
 ### `navigators/`
 Contains all react navigation to screens,tabs.
-
-### `sagas/index`
-Should you generate sagas for your containers, include them in root saga
-```JS
-export default function* root() {
-  yield all([
-    /**
-     * @see https://redux-saga.js.org/docs/basics/UsingSagaHelpers.html
-     */
-    // include container sagas here
-    homeScreenSaga(),
-    rootScreenSaga(),
-    loginScreenSaga(),
-    phoenixLoginScreenSaga(),
-  ]);
-}
-```
 
 ### `theme/`
 This directory contains base styles for the application
