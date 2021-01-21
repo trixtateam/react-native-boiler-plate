@@ -46,54 +46,74 @@ export function PhoenixLoginScreen({
         onDismiss={dispatchDefaultAction}
       />
       <Controller
-        as={Input}
         control={control}
-        placeholder="Domain"
         name="domain"
-        // eslint-disable-next-line react-native/no-inline-styles
-        containerStyle={{ marginBottom: 20 }}
-        errorStyle={{ color: colors.error }}
-        errorMessage={errors.domain && 'Enter domain'}
-        // eslint-disable-next-line react-native/no-inline-styles
-        leftIcon={<Icon name="globe" size={24} color={colors.accent} style={{ marginRight: 20 }} />}
-        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
+        render={({ onChange, value }) => (
+          <Input
+            onChangeText={(text) => onChange(text)}
+            value={value}
+            placeholder="Domain"
+            // eslint-disable-next-line react-native/no-inline-styles
+            containerStyle={{ marginBottom: 20 }}
+            errorStyle={{ color: colors.error }}
+            errorMessage={errors.domain && 'Enter domain'}
+            leftIcon={
+              // eslint-disable-next-line react-native/no-inline-styles
+              <Icon name="globe" size={24} color={colors.accent} style={{ marginRight: 20 }} />
+            }
+          />
+        )}
         defaultValue=""
       />
       <Controller
-        as={Input}
         control={control}
-        placeholder="Email Address"
         name="identity"
-        // eslint-disable-next-line react-native/no-inline-styles
-        containerStyle={{
-          marginBottom: 20,
-        }}
-        errorStyle={{ color: colors.error }}
-        errorMessage={errors.identity && 'Enter email address'}
-        leftIcon={
-          // eslint-disable-next-line react-native/no-inline-styles
-          <Icon name="envelope" size={24} color={colors.accent} style={{ marginRight: 20 }} />
-        }
-        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
+        render={({ onChange, value }) => (
+          <Input
+            placeholder="Email Address"
+            value={value}
+            // eslint-disable-next-line react-native/no-inline-styles
+            containerStyle={{
+              marginBottom: 20,
+            }}
+            onChangeText={(text) => onChange(text)}
+            errorStyle={{ color: colors.error }}
+            errorMessage={errors.identity && 'Enter email address'}
+            leftIcon={
+              // eslint-disable-next-line react-native/no-inline-styles
+              <Icon name="envelope" size={24} color={colors.accent} style={{ marginRight: 20 }} />
+            }
+            name="identity"
+          />
+        )}
       />
       <Controller
-        as={Input}
         control={control}
-        placeholder="Password"
         name="password"
-        // eslint-disable-next-line react-native/no-inline-styles
-        containerStyle={{ marginBottom: 20 }}
-        errorStyle={{ color: colors.error }}
-        secureTextEntry
-        errorMessage={errors.password && 'Enter password'}
-        // eslint-disable-next-line react-native/no-inline-styles
-        leftIcon={<Icon name="lock" size={24} color={colors.accent} style={{ marginRight: 10 }} />}
-        onChange={(args) => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
+        render={({ onChange, value }) => (
+          <Input
+            placeholder="Password"
+            value={value}
+            // eslint-disable-next-line react-native/no-inline-styles
+            containerStyle={{
+              marginBottom: 20,
+            }}
+            errorStyle={{ color: colors.error }}
+            secureTextEntry
+            errorMessage={errors.password && 'Enter password'}
+            leftIcon={
+              // eslint-disable-next-line react-native/no-inline-styles
+              <Icon name="lock" size={24} color={colors.accent} style={{ marginRight: 10 }} />
+            }
+            onChangeText={(text) => onChange(text)}
+            name="password"
+          />
+        )}
       />
       <Button
         disabled={isLoggingIn}

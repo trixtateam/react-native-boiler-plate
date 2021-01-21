@@ -36,6 +36,7 @@ export function configureAppStore(initialState = {}) {
       ...getDefaultMiddleware({
         thunk: false,
         immutableCheck: {
+          warnAfter: 90,
           ignore: ['socket', 'channel', 'trixta', 'phoenix', 'router'],
         },
         serializableCheck: false,

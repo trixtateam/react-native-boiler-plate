@@ -8,7 +8,7 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './SimpleListStyle';
 import PropTypes from 'prop-types';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import ApplicationStyles from '../../../theme/ApplicationStyles';
 
 function SimpleList({ items, error }) {
@@ -23,14 +23,15 @@ function SimpleList({ items, error }) {
     <ScrollView>
       {items &&
         items.map((item, index) => (
-          <ListItem
-            key={item.key}
-            title={item.title}
-            subtitle={item.subTitle}
-            leftAvatar={{ source: { uri: item.avatarUrl } }}
-            subtitleStyle={ApplicationStyles.subTitle}
-            bottomDivider
-          />
+          <ListItem key={item.key} bottomDivider>
+            <ListItem.Content>
+              <Avatar title={item.title} source={{ uri: item.avatarUrl }} />
+              <ListItem.Title>{item.title}</ListItem.Title>
+              <ListItem.Subtitle style={ApplicationStyles.subTitle}>
+                {item.subTitle}
+              </ListItem.Subtitle>
+            </ListItem.Content>
+          </ListItem>
         ))}
     </ScrollView>
   );
